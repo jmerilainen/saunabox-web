@@ -1,38 +1,16 @@
 export interface Sauna {
-    id: number;
     slug: string;
-    title: string;
+    name: string;
 }
 
-export function getAllSaunas() {
-    const all: Sauna[] = [
-        {
-            id: 100,
-            slug: 'westend',
-            title: 'Westend',
-        },
-        {
-            id: 101,
-            slug: 'haukilahti',
-            title: 'Haukilahti',
-        },
-        {
-            id: 102,
-            slug: 'toppelund',
-            title: 'Toppelund',
-        },
-        {
-            id: 103,
-            slug: 'matinkyla',
-            title: 'Matinkylä',
-        },
-    ];
+export async function getAllSaunas(): Promise<Sauna[]> {
+    const res = await fetch('http://localhost/api/v1/saunas');
 
-    return all;
+    return await res.json();
 }
 
-export function getSauna(slug: Sauna['slug']): Sauna | null {
-    const saunas = getAllSaunas();
+export async function getSauna(slug: Sauna['slug']): Promise<Sauna | null> {
+    const saunas = await getAllSaunas();
 
     return saunas.find(item => item.slug === slug) ?? null;
 }

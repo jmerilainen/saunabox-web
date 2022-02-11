@@ -3,8 +3,8 @@ import { getAllSaunas,  } from "~/models/sauna";
 import type { Sauna } from "~/models/sauna";
 import App from "~/components/App";
 
-export const loader = () => {
-  return getAllSaunas();
+export const loader = async () => {
+  return await getAllSaunas();
 };
 
 export default function Index() {
@@ -19,7 +19,7 @@ export default function Index() {
               <div className="grid">
                 <div className="font-bold text-slate-700">
                     <Link to={`/sauna/${item.slug}`} className="stretched">
-                      {item.title}
+                      {item.name}
                     </Link>
                 </div>
                 <div className="text-sm text-slate-600">

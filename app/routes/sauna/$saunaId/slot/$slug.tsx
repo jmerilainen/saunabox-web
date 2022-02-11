@@ -1,11 +1,19 @@
 import { ActionFunction, Form, useActionData, useTransition } from "remix";
+import { orderSlot } from "~/models/slot";
 import { useSauna } from "../../$saunaId";
 
 export const action: ActionFunction = async ({
     request,
 }) => {
+    const formData = await request.formData();
+    const { phone, slot } = Object.fromEntries(formData);
+
+    const res = await orderSlot(parseInt(slot.toString()), {
+        phone: phone.toString(),
+    });
+
     return {
-        code: 39583,
+        code: res.code,
     };
 };
 
@@ -30,17 +38,20 @@ export default function Slot() {
                 <div className="grid gap-4">
                 <div className="flex items-center justify-between gap-4">
                     <div className="font-bold text-slate-800">
-                        {sauna?.title}
+                        {sauna?.name}
                     </div>
                     <div className="h-[2px] rounded bg-slate-300 grow mt-[3px]"></div>
                     <div className="text-slate-700">
-                        {slot.time} - 9:50
+                        {slot.from} - {slot.to}
                     </div>
                 </div>
                 {state === 'sent'
                 ?
-                    <div>
-                        Koodisi: {actionData?.code}
+                    <div className="space-y-2">
+                        <div>
+                            Koodisi: <strong>{actionData?.code}</strong>
+                        </div>
+                        <small className="block leading-none">Koodi on puhelinnumerosi neljä viimeistä numeroa 😎</small>
                     </div>
                 :
                 <Form method="post">
@@ -48,10 +59,12 @@ export default function Slot() {
                         <div>
                             <label htmlFor="phone" className="text-sm text-slate-600">Puhelin</label>
                             <input id="phone" type="text" name="phone" className="block w-full p-2 border rounded border-slate-400" />
+                            <input id="slot" type="hidden" name="slot" value={slot.id} />
                         </div>
                         <button
                             disabled={state === 'sending'}
-                            className="block w-full p-4 text-white transition rounded bg-sky-700 hover:bg-sky-500">
+                            className="block w-full p-4 text-white transition rounded bg-sky-700 hover:bg-sky-500 disabled:opacity-20"
+                        >
                             Varaa
                         </button>
                     </div>

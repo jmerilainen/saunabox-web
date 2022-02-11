@@ -1,62 +1,37 @@
 export interface Slot {
     id: number | string;
-    time: string;
-    isAvilable: boolean;
+    from: Date;
+    to: Date;
+    stock: number;
 }
 
-export function getAllSlotsForSauna(id: number = 0) {
-    const all: Slot[] = [
-        {
-            id: 100,
-            time: '09:00',
-            isAvilable: true,
-        },
-        {
-            id: 3453,
-            time: '10:00',
-            isAvilable: true,
-        },
-        {
-            id: 24,
-            time: '11:00',
-            isAvilable: true,
-        },
-        {
-            id: 453,
-            time: '12:00',
-            isAvilable: false,
-        },
-        {
-            id: 346,
-            time: '13:00',
-            isAvilable: true,
-        },
-        {
-            id: 456,
-            time: '14:00',
-            isAvilable: false,
-        },
-        {
-            id: 757,
-            time: '15:00',
-            isAvilable: false,
-        },
-        {
-            id: 96845,
-            time: '16:00',
-            isAvilable: false,
-        },
-        {
-            id: 2048,
-            time: '17:00',
-            isAvilable: true,
-        },
-        {
-            id: 3065,
-            time: '18:00',
-            isAvilable: true,
-        },
-    ];
+interface SlotOrderData {
+    phone: string;
+}
 
-    return all;
+export async function getAllSlotsForSauna(slug: string): Promise<Slot[]> {
+    const res = await fetch(`http://localhost/api/v1/saunas/${slug}/slots`);
+
+    const data = await res.json();
+
+    return data.map((item: any) => {
+        return {
+            id: parseInt(item.id),
+            from: new Date(item.from),
+            to: new Date(item.to),
+            stock: parseInt(item.stock),
+        } as Slot;
+    });
+}
+
+export async function orderSlot(id: number, data: SlotOrderData) {
+    const res = await fetch(`http://localhost/api/v1/slots/${id}/reserve`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    return res.json();
 }

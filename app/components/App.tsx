@@ -8,7 +8,6 @@ interface SidebarProps {
     children: ReactNode
 }
 
-
 interface MainProps {
     children: ReactNode;
 }
@@ -18,9 +17,9 @@ const App: FC<AppProps> & {
     Main: FC<MainProps>;
 } = ({ children }) => {
     return (
-        <div className="w-full py-12">
+        <div className="w-full">
             <div className="w-full max-w-screen-md mx-auto">
-                <div className="flex min-h-screen gap-4">
+                <div className="flex min-h-screen gap-4 py-12">
                     {children}
                 </div>
             </div>
