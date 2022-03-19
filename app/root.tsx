@@ -9,9 +9,14 @@ import {
 import type { MetaFunction } from "remix";
 
 import styles from "./tailwind.css";
+import mapbox from "mapbox-gl/dist/mapbox-gl.css";
+import { MapProvider } from "react-map-gl";
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: mapbox },
+  ];
 }
 
 export const meta: MetaFunction = () => {
@@ -27,8 +32,10 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-slate-50-100">
-        <Outlet />
+      <body>
+        <MapProvider>
+         <Outlet />
+        </MapProvider>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}

@@ -3,6 +3,7 @@ export interface Slot {
     from: Date;
     to: Date;
     stock: number;
+    token: string;
 }
 
 interface SlotOrderData {

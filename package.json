@@ -15,10 +15,15 @@
     "@remix-run/react": "^1.1.3",
     "@remix-run/serve": "^1.1.3",
     "@remix-run/vercel": "^1.1.3",
+    "@types/mapbox-gl": "^2.6.1",
     "date-fns": "^2.28.0",
+    "mapbox-gl": "^2.7.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix": "^1.1.3"
+    "react-map-gl": "^7.0.6",
+    "remix": "^1.1.3",
+    "tailwind-easing-gradients": "^1.0.2",
+    "tiny-invariant": "^1.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.1.3",

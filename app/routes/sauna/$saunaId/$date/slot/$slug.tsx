@@ -1,22 +1,23 @@
 import { ActionFunction, Form, useActionData, useTransition } from "remix";
-import { orderSlot } from "~/models/slot";
-import { useSauna } from "../../$saunaId";
+import { api } from "~/models/sauna";
+import { useSauna } from "../../$date";
 
 export const action: ActionFunction = async ({
     request,
 }) => {
     const formData = await request.formData();
-    const { phone, slot } = Object.fromEntries(formData);
+    const { phone, slot, token } = Object.fromEntries(formData);
 
-    const res = await orderSlot(parseInt(slot.toString()), {
+    const res = await api.reserve({
         phone: phone.toString(),
+        slot: slot.toString(),
+        token: token.toString(),
     });
 
     return {
         code: res.code,
     };
 };
-
 
 export default function Slot() {
     const actionData = useActionData();
@@ -33,7 +34,7 @@ export default function Slot() {
     }
 
     return (
-        <div className="flex items-center h-[80%]">
+        <div className="flex items-center p-4 bg-slate-100">
             <div className="flex-1">
                 <div className="grid gap-4">
                 <div className="flex items-center justify-between gap-4">
@@ -60,6 +61,7 @@ export default function Slot() {
                             <label htmlFor="phone" className="text-sm text-slate-600">Puhelin</label>
                             <input id="phone" type="text" name="phone" className="block w-full p-2 border rounded border-slate-400" />
                             <input id="slot" type="hidden" name="slot" value={slot.id} />
+                            <input id="token" type="hidden" name="token" value={slot.token} />
                         </div>
                         <button
                             disabled={state === 'sending'}
