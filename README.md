@@ -1,3 +1,7 @@
+# Saunabox (Client)
+
+> See also the backend of the app: [jmerilainen/saunabox-app](https://github.com/jmerilainen/saunabox-app)
+
 # Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
