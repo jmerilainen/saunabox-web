@@ -44,3 +44,57 @@
         url('/fonts/poppins-v19-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
 }
+
+@layer utilities {
+  @keyframes sauna {
+    0% {
+      transform: scaleY(1);
+    }
+
+    23% {
+      transform: scaleY(0.7);
+    }
+
+    50% {
+      transform: scaleY(1);
+    }
+
+    77% {
+      transform: scaleY(1.8);
+    }
+
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes box {
+    0% {
+      transform: scaleY(1);
+    }
+
+    23% {
+      transform: scaleY(2);
+    }
+
+    50% {
+      transform: scaleY(1);
+    }
+
+    77% {
+      transform: scaleY(0.5);
+    }
+
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+  .animate-logo-sauna {
+    animation: sauna 8s linear infinite;
+  }
+
+  .animate-logo-box {
+    animation: box 10s linear 0.5s infinite;
+  }
+}

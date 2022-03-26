@@ -42,14 +42,24 @@ const AppHeader = () => (
 
 const App = ({ children }: AppProps) => {
     return (
-        <div className="bg-[#faf9f9] min-h-screen w-full font-body text-[#080D21] dark:bg-[#080D21] dark:text-[#faf9f9] flex flex-col">
-            <AppHeader />
-            <div className="flex-1">
-                {children}
+        <div className="overflow-hidden">
+            <div className="flex items-center justify-center w-screen min-h-screen md:hidden bg-[#faf9f9] text-[#080D21] dark:bg-[#080D21] dark:text-[#faf9f9] fixed inset-0 z-50">
+                <div className="max-w-screen-sm p-8 mx-auto space-y-8 text-center">
+                    <span className="text-4xl font-bold tracking-wideer font-display">
+                        <span className="inline-block animate-logo-sauna">Sauna</span><span className="inline-block animate-logo-box">Box</span>
+                    </span>
+                    <p>Sorry, this is just an example app and small screen sizes are not supported.</p>
+                </div>
             </div>
-            <footer className="px-12 py-8 text-xs text-right">
-                &copy; jmerilainen - demo project
-            </footer>
+            <div className="bg-[#faf9f9] min-h-screen w-full font-body text-[#080D21] dark:bg-[#080D21] dark:text-[#faf9f9] flex flex-col">
+                <AppHeader />
+                <div className="flex-1">
+                    {children}
+                </div>
+                <footer className="px-12 py-8 text-xs text-right">
+                    &copy; jmerilainen - demo project
+                </footer>
+            </div>
         </div>
     );
 }
