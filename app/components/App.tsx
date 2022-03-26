@@ -26,13 +26,13 @@ const AppHeader = () => (
                 </Link>
             </div>
             <div className="flex justify-center gap-8">
-                <NavLink to="/sauna" className={({ isActive }) => isActive ? 'flex gap-2 items-center border-b-2' : 'flex gap-2 items-center'}>
+                <NavLink to="/sauna" className={({ isActive }) => isActive ? 'flex gap-2 items-center border-b-2' : 'flex gap-2 items-center hover:text-slate-700 transition'}>
                     <span>Saunas</span>
                 </NavLink>
 
             </div>
             <div className="flex justify-end gap-8">
-                <NavLink to="/login" className={({ isActive }) => isActive ? 'flex gap-2 items-center border-b-2' : 'flex gap-2 items-center'}>
+                <NavLink to="/login" className={({ isActive }) => isActive ? 'flex gap-2 items-center border-b-2' : 'flex gap-2 items-center hover:text-slate-700 transition'}>
                     <IconUser />
                 </NavLink>
             </div>
@@ -42,9 +42,14 @@ const AppHeader = () => (
 
 const App = ({ children }: AppProps) => {
     return (
-        <div className="bg-[#faf9f9] min-h-screen w-full font-body text-[#080D21] dark:bg-[#080D21] dark:text-[#faf9f9]">
+        <div className="bg-[#faf9f9] min-h-screen w-full font-body text-[#080D21] dark:bg-[#080D21] dark:text-[#faf9f9] flex flex-col">
             <AppHeader />
-            {children}
+            <div className="flex-1">
+                {children}
+            </div>
+            <footer className="px-12 py-8 text-xs text-right">
+                &copy; jmerilainen - demo project
+            </footer>
         </div>
     );
 }

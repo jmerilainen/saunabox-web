@@ -6,12 +6,12 @@ export const action: ActionFunction = async ({
     request,
 }) => {
     const formData = await request.formData();
-    const { phone, slot, token } = Object.fromEntries(formData);
+    const { phone, sauna, sku } = Object.fromEntries(formData);
 
     const res = await api.reserve({
         phone: phone.toString(),
-        slot: slot.toString(),
-        token: token.toString(),
+        sauna: sauna.toString(),
+        sku: sku.toString(),
     });
 
     return {
@@ -48,26 +48,26 @@ export default function Slot() {
                 </div>
                 {state === 'sent'
                 ?
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                         <div>
-                            Koodisi: <strong>{actionData?.code}</strong>
+                            Access code: <span className="inline-block px-2 py-1 text-xl font-bold tracking-wider rounded bg-slate-200">{actionData?.code}</span>
                         </div>
-                        <small className="block leading-none">Koodi on puhelinnumerosi neljä viimeistä numeroa 😎</small>
+                        <small className="block leading-none rounde">Code is the last four digits of inserted phone number 😎</small>
                     </div>
                 :
                 <Form method="post">
                     <div className="grid gap-2">
                         <div>
-                            <label htmlFor="phone" className="text-sm text-slate-600">Puhelin</label>
-                            <input id="phone" type="text" name="phone" className="block w-full p-2 border rounded border-slate-400" />
-                            <input id="slot" type="hidden" name="slot" value={slot.id} />
-                            <input id="token" type="hidden" name="token" value={slot.token} />
+                            <label htmlFor="phone" className="text-sm text-slate-600">Phone</label>
+                            <input id="phone" type="text" name="phone" className="block w-full p-2 border rounded border-slate-400 " />
+                            <input id="sauna" type="hidden" name="sauna" value={sauna.id} />
+                            <input id="sku" type="hidden" name="sku" value={slot.sku} />
                         </div>
                         <button
                             disabled={state === 'sending'}
-                            className="block w-full p-4 text-white transition rounded bg-sky-700 hover:bg-sky-500 disabled:opacity-20"
+                            className="block w-full p-4 text-white transition rounded bg-sky-800 hover:bg-sky-700 hover:shadow-lg disabled:opacity-20"
                         >
-                            Varaa
+                            Reserve
                         </button>
                     </div>
                 </Form>

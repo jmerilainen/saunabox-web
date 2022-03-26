@@ -30,8 +30,8 @@ export default function Index() {
                     </div>
                   </div>
                   <p className="text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, voluptas earum. Soluta cupiditate, maiores harum distinctio veniam sequi illo. Odio exercitationem aut nisi pariatur repellendus magni ducimus. Voluptatum, assumenda delectus?</p>
-                  <Link to="/sauna" className="py-2 px-4 rounded bg-[#595959] text-white inline-block">
-                    Get acccess
+                  <Link to="/sauna" className="py-2 px-4 rounded bg-[#595959] text-white inline-block hover:bg-slate-400 transition">
+                    Get Acccess
                   </Link>
                 </div>
                 <div className="w-1/2 shrink-0">
@@ -44,7 +44,7 @@ export default function Index() {
       </Container>
       <div className="relative text-[#080D21] dark:bg-[#080D21]">
           <div className="absolute inset-0 z-10 pointer-events-none bg-easing-b-map dark:bg-easing-b-map-dark"></div>
-          <MyMap id="index" markers={items.map(sauna => sauna.cooridinates)} />
+          <MyMap id="index" markers={items.map(sauna => sauna.location)} />
         </div>
     </App>
   )

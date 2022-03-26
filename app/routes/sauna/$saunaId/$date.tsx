@@ -2,9 +2,8 @@ import { format } from "date-fns";
 import { useRef } from "react";
 import { json, Link, LoaderFunction, Outlet, useLoaderData, useOutletContext, useParams } from "remix";
 import invariant from "tiny-invariant";
-import { api, Sauna } from "~/models/sauna";
-import { useLayoutEffect } from "~/utils/useLayoutEffect";
-import { Slot } from "~/models/slot";
+import { api, Sauna, Slot } from "~/models/sauna";
+import { useLayoutEffect } from "~/utils/useLayoutEffect"
 
 type LoaderData = {
   sauna: Sauna,
@@ -64,17 +63,17 @@ export default function SaunaDate() {
   return (
       <div className="grid gap-4">
         <div className="relative grid gap-4">
-          <div className="sticky top-0 z-10 p-4 font-bold shadow-lg">
+          <div className="sticky top-0 z-10 p-4 font-bold rounded shadow-lg bg-slate-100 dark:bg-slate-800 tex-tw">
             {today}
           </div>
           <div className="grid gap-4">
             {! formattedSlots.length
             ? <div>Ei aikoja</div>
             : formattedSlots.map((item) => {
-              return slug == item.id
-              ? <div className={`relative`} key={item.id}>
-                    <div className="grid p-4 rounded-t bg-sky-600">
-                      <div className={`font-bold text-white flex justify-between`}>
+              return slug == item.slug
+              ? <div className={`relative`} key={item.sku}>
+                    <div className="grid p-4 rounded-t bg-slate-200 ">
+                      <div className={`font-bold text-sky-700 dark:text-slate-700 flex justify-between`}>
                         <div>
                           {item.from}
                         </div>
@@ -83,26 +82,26 @@ export default function SaunaDate() {
                         </div>
                       </div>
                     </div>
-                    <div className="border-2 rounded-b border-sky-600">
+                    <div className="rounded-b text-slate-600">
                       <Outlet context={{sauna, slot: item}} />
                     </div>
                   </div>
-              : item.stock
-              ? <div className={`relative p-4 rounded transition  ${slug == item.id ? 'bg-slate-500 text-slate-100' : 'bg-slate-100 hover:bg-slate-200'}`} key={item.id}>
+              : item.available
+              ? <div className={`relative p-4 rounded transition  ${slug == item.slug ? 'bg-slate-500 text-slate-100' : 'bg-slate-100 hover:bg-slate-200'}`} key={item.sku}>
                     <div className="grid">
-                      <div className={`font-bold ${slug == item.id ? 'text-white' : 'text-slate-800'}`}>
-                        <Link to={`slot/${item.id}`} className="stretched">
+                      <div className={`font-bold ${slug == item.slug ? 'text-white' : 'text-slate-800'}`}>
+                        <Link to={`slot/${item.slug}`} className="stretched">
                         {item.from}
                         </Link>
                       </div>
-                      <div className={`text-sm ${slug == item.id ? 'text-white' : 'text-slate-600'}`}>
-                        Vapaa
+                      <div className={`text-sm ${slug == item.slug ? 'text-white' : 'text-slate-600'}`}>
+                        Available
                       </div>
                     </div>
                   </div>
-                : <div className={`relative p-4 rounded bg-red-200`} key={item.id}>
+                : <div className={`relative p-4 rounded bg-rose-600 opacity-25`} key={item.slug}>
                     <div className="grid">
-                      <div className={`font-bold text-white`}>
+                      <div className={`font-bold text-slate-50`}>
                         {item.from}
                       </div>
                     </div>

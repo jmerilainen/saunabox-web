@@ -1,8 +1,8 @@
 export interface Sauna {
+    id: number;
     slug: string;
     name: string;
-    cooridinates: Coordinate;
-    latlng: LatLng;
+    location: Coordinate;
     slots: Slot[];
 }
 
@@ -11,16 +11,13 @@ interface Coordinate {
     longitude: number;
 }
 
-interface LatLng {
-    lng: number;
-    lat: number;
-}
 
 export interface Slot {
-    id: number | string;
+    slug: string;
     from: Date;
     to: Date;
-    stock: number;
+    sku: number;
+    available: boolean;
 }
 
 const API_BASE_URL = process.env.API_BASE_URL;
@@ -48,19 +45,19 @@ export const api = {
 
 
     async saunas() {
-        return this.request<Sauna[]>('/api/v1/saunas');
+        return this.request<Sauna[]>('/api/saunas');
     },
 
     async sauna(slug: string) {
-        return this.request<Sauna>(`/api/v1/saunas/${slug}`);
+        return this.request<Sauna>(`/api/saunas/${slug}`);
     },
 
     async slots(slug: string, date: string) {
-        return this.request<Slot[]>(`/api/v1/saunas/${slug}/slots/${date}`);
+        return this.request<Slot[]>(`/api/saunas/${slug}/slots/${date}`);
     },
 
     async reserve(data: any) {
-        return this.request<any>('/api/v1/purchase', {
+        return this.request<any>('/api/purchase', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

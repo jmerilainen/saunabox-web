@@ -6,7 +6,7 @@ export default function SaunaIndex() {
 
   return (
       <div>
-        <MyMap id="map" markers={saunas.map(sauna => sauna.cooridinates)} />
+        <MyMap id="map" markers={saunas.map(sauna => sauna.location)} />
       </div>
   )
 }
