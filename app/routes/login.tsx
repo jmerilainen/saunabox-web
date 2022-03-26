@@ -6,10 +6,10 @@ export default function Login() {
         <App>
             <Container>
                 <div className="flex justify-center w-full py-32">
-                    <div className="w-full max-w-sm p-8 border rounded shadow bg-slate-200">
+                    <div className="w-full max-w-sm p-8 border rounded shadow bg-slate-800 dark:bg-slate-200">
                         <div className="grid gap-4">
                             <input type="text" className="w-full p-2 border rounded" placeholder="Phone or email" />
-                            <button className="inline-block px-4 py-2 rounded opacity-50 bg-slate-900">
+                            <button className="inline-block px-4 py-2 rounded opacity-50 bg-slate-200 dark:bg-slate-900">
                                 Login coming later...
                             </button>
                         </div>

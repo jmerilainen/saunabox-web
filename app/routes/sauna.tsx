@@ -16,7 +16,6 @@ interface ContextType {
 
 export const loader: LoaderFunction = async () => {
   const saunas = await api.saunas();
-  console.log(saunas);
 
   return json<LoaderData>({
     saunas
